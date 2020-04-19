@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
     public GameObject player;
     public GameObject princess;
     private string gameOverMessage = "You died!";
+
+    public GameObject explosionGo;
     // Start is called before the first frame update
     void Start()
     {
@@ -63,6 +65,8 @@ public class GameManager : MonoBehaviour
                 break;
         }
         ShowGameOverMessage();
+        Instantiate(explosionGo, player.transform.position, Quaternion.identity);
+        Instantiate(explosionGo, princess.transform.position, Quaternion.identity);
         player.GetComponent<PlayerHandler>().DisablePlayer();
         princess.GetComponent<PlayerHandler>().DisablePlayer();
     }

@@ -22,13 +22,16 @@ public class Enemy : MonoBehaviour
         
         if (collision.CompareTag("BulletPlayer"))
         {
-            spriteFlash.FlashMulitpleTimes();
+            spriteFlash.Flash();
             healthAmount -= 0.33f;
             healthBar.GetComponent<HealthbarEnemy>().DecreaseHealth(healthAmount);
             
             if (healthAmount <= 0.00f)
             {
                 gameManager.GameOver(1);
+                Instantiate(explosionGo, transform.position, Quaternion.identity);
+                Destroy(gameObject);
+                
             }
             else
             {

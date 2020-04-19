@@ -14,11 +14,15 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
     public GameObject bulletPrefab;
 
+    public AudioClip shootSound;
+    public AudioSource audioPlayer;
+
     // Start is called before the first frame update
     void Start()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        audioPlayer = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -61,6 +65,7 @@ public class PlayerController : MonoBehaviour
 
     public void ShootBullet()
     {
+        audioPlayer.PlayOneShot(shootSound);
         Vector3 difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         float rotZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
         Quaternion rotation = Quaternion.Euler(0f, 0f, rotZ);
